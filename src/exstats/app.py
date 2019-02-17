@@ -1,12 +1,13 @@
-#! /usr/bin/python3
-
 from argparse import ArgumentParser
+
+import numpy as  np
+import pandas as pd
 
 from . import getData
 
 
 
-NO_EXTENSION = "---"
+SIZE_FORMATTER = "{:,d}".format
 
 
 
@@ -39,7 +40,24 @@ def run():
     opts = parseArgs()
     givenPaths = opts.src
 
-    data = getData(givenPaths)
-    data = sorted(data.items(), key=lambda d: d[1])
-    for ext, size in data:
-        print("{} : {}".format(ext or NO_EXTENSION, size))
+    data: pd.DataFrame = getData(givenPaths)
+
+    data.sort_values("Size", inplace=True)
+
+    total = data.Size.sum()
+
+    data["Percentage"] = data.Size / total
+    data.Size = data.Size.astype(np.int)
+
+    output = data.to_string(
+        formatters={
+            "Size": SIZE_FORMATTER,
+            "Percentage": "{:.2%}".format,
+            },
+        max_cols=None,
+        max_rows=None,
+        )
+
+    print(output)
+    print()
+    print("Total Size: {} bytes".format(SIZE_FORMATTER(total)))
