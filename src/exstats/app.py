@@ -53,8 +53,11 @@ def run():
         formatters={
             "Size": SIZE_FORMATTER,
             "Percentage": "{:.2%}".format,
-            }
+            },
+        max_cols=None,
+        max_rows=None,
         )
+
     print(output)
     print()
     print("Total Size: {} bytes".format(SIZE_FORMATTER(total)))
