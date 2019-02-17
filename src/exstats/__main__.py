@@ -1,4 +1,6 @@
 from .app import run
 
-def main()
+
+
+def main():
     run()
