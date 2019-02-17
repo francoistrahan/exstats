@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from libexstats import getData
+from exstats import getData
 from argparse import ArgumentParser
 
 NO_EXTENSION = "---"
