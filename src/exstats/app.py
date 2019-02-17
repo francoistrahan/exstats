@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 
-from exstats import getData
+from . import getData
 
 
 

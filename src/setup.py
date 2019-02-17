@@ -5,7 +5,7 @@ from exstats import VERSION
 
 
 setup(
-    name='extstats',
+    name='exstats',
     version=VERSION,
     description='Scipts to computes disk usage satistics by file extension',
     url='https://rm.ftrahan.com/projects/exstats',
@@ -17,7 +17,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'extstats = extstats.__main__:main',
+            'exstats = exstats.__main__:main',
             ],
         },
 
