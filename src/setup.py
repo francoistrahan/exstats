@@ -8,7 +8,7 @@ setup(
     name='exstats',
     version=VERSION,
     description='Scipts to computes disk usage satistics by file extension',
-    url='https://rm.ftrahan.com/projects/exstats',
+    url='https://github.com/francoistrahan/exstats',
 
     author='François Trahan',
     author_email='francois.trahan@gmail.com',
