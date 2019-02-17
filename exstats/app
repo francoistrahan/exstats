@@ -28,7 +28,7 @@ def parseArgs() :
 
     return opts
 
-def main() :
+def run() :
     opts = parseArgs()
     givenPaths = opts.src
 
@@ -38,4 +38,3 @@ def main() :
     for ext, size in data :
         print("{} : {}".format(ext or NO_EXTENSION, size))
     
-main()
