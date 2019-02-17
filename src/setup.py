@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 
+from distutils.core import setup
 from os import umask
+
 from libexstats import __version__
 
-from distutils.core import setup
+
 
 umask(0o022)
 
@@ -20,14 +22,14 @@ setup(
     scripts=[
         "exstats",
         ],
-#    data_files=[
-#        (
-#            "share/libftbackup/samples",
-#            [
-#                "samples/exclude.regex",
-#                "samples/nocompress.regex",
-#                "samples/prune.regex",
-#                "samples/wraperscript",
-#                ]),
-#        ],
+    #    data_files=[
+    #        (
+    #            "share/libftbackup/samples",
+    #            [
+    #                "samples/exclude.regex",
+    #                "samples/nocompress.regex",
+    #                "samples/prune.regex",
+    #                "samples/wraperscript",
+    #                ]),
+    #        ],
     )
