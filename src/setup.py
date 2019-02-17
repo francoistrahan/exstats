@@ -1,35 +1,24 @@
-#! /usr/bin/env python3
+from setuptools import find_packages, setup
 
-from distutils.core import setup
-from os import umask
-
-from libexstats import __version__
+from exstats import VERSION
 
 
-
-umask(0o022)
 
 setup(
     name='extstats',
-    version=__version__,
+    version=VERSION,
     description='Scipts to computes disk usage satistics by file extension',
+    url='https://rm.ftrahan.com/projects/exstats',
+
     author='François Trahan',
     author_email='francois.trahan@gmail.com',
-    url='https://rm.ftrahan.com/projects/exstats',
-    packages=[
-        "libexstats",
-        ],
-    scripts=[
-        "exstats",
-        ],
-    #    data_files=[
-    #        (
-    #            "share/libftbackup/samples",
-    #            [
-    #                "samples/exclude.regex",
-    #                "samples/nocompress.regex",
-    #                "samples/prune.regex",
-    #                "samples/wraperscript",
-    #                ]),
-    #        ],
+
+    packages=find_packages(),
+
+    entry_points={
+        'console_scripts': [
+            'extstats = extstats.__main__:main',
+            ],
+        },
+
     )

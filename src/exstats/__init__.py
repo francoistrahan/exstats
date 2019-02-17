@@ -3,7 +3,7 @@ from os.path import abspath, getsize, isdir, isfile, islink, join, splitext
 
 
 
-__version__ = "0.1.0"
+VERSION = "0.1.0"
 
 __all__ = [
     ]
