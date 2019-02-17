@@ -6,7 +6,7 @@ import pandas as pd
 
 
 
-VERSION = "1.0.0"
+VERSION = "1.0.0-next"
 
 __all__ = [
     ]
