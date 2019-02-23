@@ -40,7 +40,7 @@ def run():
     opts = parseArgs()
     givenPaths = opts.src
 
-    data: pd.DataFrame = getData(givenPaths)
+    data = getData(givenPaths)
 
     data.sort_values("Size", inplace=True)
 
