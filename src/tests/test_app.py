@@ -56,10 +56,10 @@ def test_help(capsys):
 
         assert ex.value.code == 0
 
-    out, err = capsys.readouterr()
+    outputs = capsys.readouterr()
 
-    assert EXPECTED_OUT == out
-    assert EXPECTED_ERR == err
+    assert EXPECTED_OUT == outputs.out
+    assert EXPECTED_ERR == outputs.err
 
 
 
@@ -75,8 +75,9 @@ def test_sampledata(shared_datadir, capsys):
 
     args = [str(shared_datadir)]
     run(args)
-    out, err = capsys.readouterr()
+    
+    outputs = capsys.readouterr()
 
-    print(out)
-    assert EXPECTED_OUT == out
-    assert "" == err
+    print(outputs.out)
+    assert EXPECTED_OUT == outputs.out
+    assert "" == outputs.err
