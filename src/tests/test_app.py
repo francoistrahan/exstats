@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 from pytest import fixture, mark, raises
 
 from exstats.app import run
@@ -14,13 +12,12 @@ class ExitException(Exception):
 
 
 @fixture
-def exitmock():
+def exitmock(monkeypatch):
     def raiseOnExit(self, code=0, message=None):
         raise ExitException(code, message)
 
 
-    with patch("argparse.ArgumentParser.exit", raiseOnExit) as patcher:
-        yield patcher
+    monkeypatch.setattr("argparse.ArgumentParser.exit", raiseOnExit)
 
 
 
