@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from pytest import fixture, raises
+from pytest import fixture, raises, mark
 
 from exstats.app import run
 
@@ -23,8 +23,8 @@ def exitmock():
         yield patcher
 
 
-
-def test_noparams(exitmock, capsys):
+@mark.usefixtures("exitmock")
+def test_noparams(capsys):
     EXPECTED_ERR = "usage: exstat [-h] SRC [SRC ...]\n"
     EXPECTED_OUT = ""
 
@@ -40,7 +40,8 @@ def test_noparams(exitmock, capsys):
 
 
 
-def test_help(exitmock, capsys):
+@mark.usefixtures("exitmock")
+def test_help(capsys):
     EXPECTED_ERR = ""
     EXPECTED_OUT = ("usage: exstat [-h] SRC [SRC ...]\n"
                     "\n"
