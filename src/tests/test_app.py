@@ -1,6 +1,4 @@
-from unittest.mock import patch
-
-from pytest import fixture, raises
+from pytest import fixture, mark, raises
 
 from exstats.app import run
 
@@ -14,17 +12,17 @@ class ExitException(Exception):
 
 
 @fixture
-def exitmock():
+def exitmock(monkeypatch):
     def raiseOnExit(self, code=0, message=None):
         raise ExitException(code, message)
 
 
-    with patch("argparse.ArgumentParser.exit", raiseOnExit) as patcher:
-        yield patcher
+    monkeypatch.setattr("argparse.ArgumentParser.exit", raiseOnExit)
 
 
 
-def test_noparams(exitmock, capsys):
+@mark.usefixtures("exitmock")
+def test_noparams(capsys):
     EXPECTED_ERR = "usage: exstat [-h] SRC [SRC ...]\n"
     EXPECTED_OUT = ""
 
@@ -40,7 +38,8 @@ def test_noparams(exitmock, capsys):
 
 
 
-def test_help(exitmock, capsys):
+@mark.usefixtures("exitmock")
+def test_help(capsys):
     EXPECTED_ERR = ""
     EXPECTED_OUT = ("usage: exstat [-h] SRC [SRC ...]\n"
                     "\n"
@@ -57,10 +56,10 @@ def test_help(exitmock, capsys):
 
         assert ex.value.code == 0
 
-    out, err = capsys.readouterr()
+    outputs = capsys.readouterr()
 
-    assert EXPECTED_OUT == out
-    assert EXPECTED_ERR == err
+    assert EXPECTED_OUT == outputs.out
+    assert EXPECTED_ERR == outputs.err
 
 
 
@@ -76,8 +75,9 @@ def test_sampledata(shared_datadir, capsys):
 
     args = [str(shared_datadir)]
     run(args)
-    out, err = capsys.readouterr()
+    
+    outputs = capsys.readouterr()
 
-    print(out)
-    assert EXPECTED_OUT == out
-    assert "" == err
+    print(outputs.out)
+    assert EXPECTED_OUT == outputs.out
+    assert "" == outputs.err
