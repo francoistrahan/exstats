@@ -1,9 +1,11 @@
+import sys
+
 from .app import run
 
 
 
 def main():
-    run()
+    run(sys.argv[1:])
 
 
 

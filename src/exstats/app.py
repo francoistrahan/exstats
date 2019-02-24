@@ -11,13 +11,15 @@ SIZE_FORMATTER = "{:,d}".format
 
 
 
-def parseArgs():
+def parseArgs(args):
     from os.path import isfile, isdir, islink
 
     prs = ArgumentParser(
-        description="Computes disk usage satistics by file extension",
+        prog="exstat",
+        description="Computes disk usage statistics by file extension",
         argument_default=None,
-        add_help=True)
+        add_help=True,
+    )
 
     prs.add_argument(
         "src",
@@ -26,7 +28,7 @@ def parseArgs():
         help="A file or a folder to be included",
         )
 
-    opts = prs.parse_args()
+    opts = prs.parse_args(args)
 
     for p in opts.src:
         if islink(p) or not (isdir(p) or isfile(p)):
@@ -36,11 +38,11 @@ def parseArgs():
 
 
 
-def run():
-    opts = parseArgs()
+def run(args):
+    opts = parseArgs(args)
     givenPaths = opts.src
 
-    data: pd.DataFrame = getData(givenPaths)
+    data = getData(givenPaths)
 
     data.sort_values("Size", inplace=True)
 
