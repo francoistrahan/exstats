@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from pytest import fixture, raises, mark
+from pytest import fixture, mark, raises
 
 from exstats.app import run
 
@@ -21,6 +21,7 @@ def exitmock():
 
     with patch("argparse.ArgumentParser.exit", raiseOnExit) as patcher:
         yield patcher
+
 
 
 @mark.usefixtures("exitmock")
