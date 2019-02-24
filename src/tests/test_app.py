@@ -61,3 +61,23 @@ def test_help(exitmock, capsys):
 
     assert EXPECTED_OUT == out
     assert EXPECTED_ERR == err
+
+
+
+def test_sampledata(shared_datadir, capsys):
+    EXPECTED_OUT = ("          Size Percentage\n"
+                    "Extension                \n"
+                    "empty        0      0.00%\n"
+                    "(none)       7      1.97%\n"
+                    "txt        116     32.68%\n"
+                    "bin        232     65.35%\n"
+                    "\n"
+                    "Total Size: 355 bytes\n")
+
+    args = [str(shared_datadir)]
+    run(args)
+    out, err = capsys.readouterr()
+
+    print(out)
+    assert EXPECTED_OUT == out
+    assert "" == err
